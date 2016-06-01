@@ -9,6 +9,7 @@
 import UIKit
 
 class ItemStore {
+    
     var allItems = [Item]()
     
     func createItem() -> Item {
