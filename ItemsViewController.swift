@@ -10,7 +10,20 @@ import UIKit
 
 
 class ItemsViewController: UITableViewController {
-    var itemStore: ItemStore!
+    
+    // MARK: - Variables
+    
+    var itemStore:  ItemStore!
+    var imageStore: ImageStore!
+
+    // MARK: - Initializers
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        navigationItem.leftBarButtonItem = editButtonItem()
+    }
+    
+    // MARK: - Actions
     
     @IBAction func addNewItem(sender: AnyObject) {
         // create a new item and add it to the store
@@ -25,10 +38,7 @@ class ItemsViewController: UITableViewController {
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        navigationItem.leftBarButtonItem = editButtonItem()
-    }
+    // MARK: - Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,8 +92,12 @@ class ItemsViewController: UITableViewController {
             
             let deleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: {
                 (action) -> Void in
-                // remove item from store
+                
+                // remove item from itemStore
                 self.itemStore.removeItem(item)
+                // remove item from imageStore
+                self.imageStore.deleteImageForKey(item.itemKey)
+                
                 // and remove row from tableView (with animation)
                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             })
@@ -113,8 +127,9 @@ class ItemsViewController: UITableViewController {
             if let row = tableView.indexPathForSelectedRow?.row {
                 // get item associated with that row, and pass it along
                 let item = itemStore.allItems[row]
-                let detailViewController = segue.destinationViewController as! DetailViewController
+                let detailViewController  = segue.destinationViewController as! DetailViewController
                 detailViewController.item = item
+                detailViewController.imageStore = imageStore
             }
         }
     }

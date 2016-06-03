@@ -89,7 +89,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="C2M-uz-vMN">
-                                <rect key="frame" x="20" y="28" width="560" height="520"/>
+                                <rect key="frame" x="20" y="28" width="560" height="476"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NGs-uH-WZg">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
@@ -148,19 +148,15 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Date Created" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zl-sY-4vq">
-                                        <rect key="frame" x="0.0" y="114" width="560" height="368"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" misplaced="YES" text="Date Created" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zl-sY-4vq">
+                                        <rect key="frame" x="0.0" y="114" width="560" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8nv-4v-WPB">
-                                        <rect key="frame" x="0.0" y="490" width="560" height="30"/>
-                                        <state key="normal" title="Change Date Created"/>
-                                        <connections>
-                                            <segue destination="g8R-Ff-OBP" kind="show" identifier="showDatePicker" id="GoN-VX-jcn"/>
-                                        </connections>
-                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="749" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KiK-cD-Vgx">
+                                        <rect key="frame" x="0.0" y="143" width="560" height="334"/>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="ZOl-UV-Fvl" firstAttribute="leading" secondItem="am1-MC-NDK" secondAttribute="leading" id="3N9-C0-3m2"/>
@@ -168,14 +164,34 @@
                                     <constraint firstItem="am1-MC-NDK" firstAttribute="leading" secondItem="x6g-il-7KB" secondAttribute="leading" id="fs8-ku-GzM"/>
                                 </constraints>
                             </stackView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mT8-5c-opj">
+                                <rect key="frame" x="20" y="556" width="560" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="tiq-Sa-DDH"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem systemItem="camera" id="zzN-Ah-NYn">
+                                        <connections>
+                                            <action selector="takePicture:" destination="2pV-pF-63u" id="nhS-io-xMm"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="trash" id="DYS-nA-Tzm">
+                                        <connections>
+                                            <action selector="removePicture:" destination="2pV-pF-63u" id="Ga7-JV-yY3"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="C2M-uz-vMN" secondAttribute="trailing" id="2U8-CD-jQz"/>
-                            <constraint firstItem="lt9-C0-EJt" firstAttribute="top" secondItem="C2M-uz-vMN" secondAttribute="bottom" constant="8" id="3i2-rN-qyd"/>
                             <constraint firstAttribute="leadingMargin" secondItem="C2M-uz-vMN" secondAttribute="leading" id="CnY-lg-paG"/>
+                            <constraint firstItem="mT8-5c-opj" firstAttribute="leading" secondItem="bsv-kl-ebd" secondAttribute="leading" id="HNm-lm-Iw5"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="mT8-5c-opj" secondAttribute="bottom" id="SYm-vz-bJe"/>
                             <constraint firstItem="C2M-uz-vMN" firstAttribute="top" secondItem="ntn-Bn-Cdi" secondAttribute="bottom" constant="8" id="kI4-7z-kA7"/>
+                            <constraint firstItem="mT8-5c-opj" firstAttribute="top" secondItem="C2M-uz-vMN" secondAttribute="bottom" constant="8" id="w49-kR-yKb"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="aHq-Tu-UGU" appends="YES" id="yfm-tb-OwH"/>
@@ -183,6 +199,7 @@
                     </view>
                     <connections>
                         <outlet property="dateLabel" destination="0zl-sY-4vq" id="xt7-qr-m5V"/>
+                        <outlet property="imageView" destination="KiK-cD-Vgx" id="40G-U4-jQw"/>
                         <outlet property="nameField" destination="mCF-lL-9rx" id="6l2-Nd-82z"/>
                         <outlet property="serialField" destination="sTo-SR-rxF" id="GLo-fE-Gc8"/>
                         <outlet property="valueField" destination="m1U-jD-MzU" id="q0B-Wa-7hX"/>
@@ -196,35 +213,6 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1624" y="374"/>
-        </scene>
-        <!--Date Picker View Controller-->
-        <scene sceneID="p3S-xM-4uE">
-            <objects>
-                <viewController id="g8R-Ff-OBP" customClass="DatePickerViewController" customModule="Homeowner" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="oPc-Hw-cQX"/>
-                        <viewControllerLayoutGuide type="bottom" id="vPV-aV-yxi"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="HeL-pN-un8">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="UMq-Bv-XuX">
-                                <rect key="frame" x="35" y="150" width="600" height="216"/>
-                                <date key="date" timeIntervalSinceReferenceDate="486456005.04990798">
-                                    <!--2016-06-01 06:40:05 +0000-->
-                                </date>
-                            </datePicker>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="datePicker" destination="UMq-Bv-XuX" id="QrH-dW-1og"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qko-Dr-Oms" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2274" y="372"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lLv-Ya-tnU">

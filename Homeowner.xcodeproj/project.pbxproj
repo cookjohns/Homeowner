@@ -18,6 +18,7 @@
 		BD2EF6EF1CFD198100C3F030 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF6EE1CFD198100C3F030 /* DetailViewController.swift */; };
 		BD2EF6F31CFEB4E900C3F030 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF6F21CFEB4E900C3F030 /* TextField.swift */; };
 		BD2EF6F51CFEBC4500C3F030 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF6F41CFEBC4500C3F030 /* DatePickerViewController.swift */; };
+		BD2EF6F71CFFF58500C3F030 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF6F61CFFF58500C3F030 /* ImageStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		BD2EF6EE1CFD198100C3F030 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		BD2EF6F21CFEB4E900C3F030 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		BD2EF6F41CFEBC4500C3F030 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		BD2EF6F61CFFF58500C3F030 /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageStore.swift; path = Homeowner/ImageStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 				BD2EF6F21CFEB4E900C3F030 /* TextField.swift */,
 				BD2EF6E81CFCD71D00C3F030 /* Item.swift */,
 				BD2EF6EA1CFCDAA600C3F030 /* ItemStore.swift */,
+				BD2EF6F61CFFF58500C3F030 /* ImageStore.swift */,
 				BD2EF6E61CFCD62000C3F030 /* ItemsViewController.swift */,
 				BD2EF6EC1CFD0B3100C3F030 /* ItemCell.swift */,
 				BD2EF6D31CFCD52300C3F030 /* Homeowner */,
@@ -159,6 +162,7 @@
 				BD2EF6EB1CFCDAA600C3F030 /* ItemStore.swift in Sources */,
 				BD2EF6F31CFEB4E900C3F030 /* TextField.swift in Sources */,
 				BD2EF6F51CFEBC4500C3F030 /* DatePickerViewController.swift in Sources */,
+				BD2EF6F71CFFF58500C3F030 /* ImageStore.swift in Sources */,
 				BD2EF6EF1CFD198100C3F030 /* DetailViewController.swift in Sources */,
 				BD2EF6E71CFCD62000C3F030 /* ItemsViewController.swift in Sources */,
 				BD2EF6ED1CFD0B3100C3F030 /* ItemCell.swift in Sources */,

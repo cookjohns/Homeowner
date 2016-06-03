@@ -8,18 +8,25 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, UITextFieldDelegate {
+class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate,
+    UIImagePickerControllerDelegate {
+    
+    // MARK: - Outlets
     
     @IBOutlet var nameField: TextField!//UITextField!
     @IBOutlet var serialField: TextField!//UITextField!
     @IBOutlet var valueField: TextField!//UITextField!
     @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var imageView: UIImageView!
+    
+    // MARK: - Variables
     
     var item: Item! {
         didSet {
             navigationItem.title = item.name
         }
     }
+    var imageStore: ImageStore!
     
     let numberFormatter: NSNumberFormatter = {
         let formatter = NSNumberFormatter()
@@ -36,8 +43,67 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         return formatter
     }()
     
+    // MARK: - Actions
+    
     @IBAction func backgroundTapped(sender: UITapGestureRecognizer) {
         view.endEditing(true)
+    }
+    
+    @IBAction func takePicture(sender: AnyObject) {
+        let imagePicker = UIImagePickerController()
+        
+        // if device has camera, take picture (else pick from photo library)
+        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+            imagePicker.sourceType = .Camera
+        } else {
+            imagePicker.sourceType = .PhotoLibrary
+        }
+        
+        imagePicker.allowsEditing = true
+        imagePicker.delegate = self
+        
+        // put imagine picker on screen
+        presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func removePicture(sender: UIBarButtonItem) {
+        // pop up alert
+        let title = "Delete image?"
+        let message = "Are you sure you want to delete this image?"
+        
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .ActionSheet)
+        
+        // alert actions
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        ac.addAction(cancelAction)
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: {
+            (action) -> Void in
+            
+            // set blank image and remove item from imageStore
+            self.imageView.image = nil
+            self.imageStore.deleteImageForKey(self.item.itemKey)
+        })
+        ac.addAction(deleteAction)
+        // present the alert controller
+        presentViewController(ac, animated: true, completion: nil)
+    }
+    
+    // MARK: - Functions
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info:
+        [String: AnyObject]) {
+        // get picked image from info dictionary
+        let image = info[UIImagePickerControllerEditedImage] as! UIImage
+        
+        // store image in imageStore with generated UUID
+        imageStore.setImage(image, forKey: item.itemKey)
+        
+        // put ^ image on screen in the image view
+        imageView.image = image
+        
+        // take picker off screen (must call to dismiss)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -47,6 +113,13 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         serialField.text = item.serialNumber
         valueField.text  = numberFormatter.stringFromNumber(item.valueInDollars)
         dateLabel.text   = dateFormatter.stringFromDate(item.dateCreated)
+        
+        // get item key
+        let key = item.itemKey
+        
+        // if item has associated image, display it in imageView
+        let imageToDisplay = imageStore.imageForKey(key)
+        imageView.image    = imageToDisplay
     }
     
     override func viewWillDisappear(animated: Bool) {

@@ -8,18 +8,26 @@
 
 import UIKit
 
-class Item: NSObject {
-    var name: String
+class Item: NSObject, NSCoding {
+    
+    // MARK: - Variables
+    
+    var name:           String
     var valueInDollars: Int
-    var serialNumber: String?
-    var dateCreated: NSDate
+    var serialNumber:   String?
+    var dateCreated:    NSDate
+    let itemKey:        String
+    
+    // MARK: - Initializers
     
     // designated initializer
     init(name: String, serialNumber: String?, valueInDollars: Int) {
         self.name = name
-        self.serialNumber = serialNumber
+        self.serialNumber   = serialNumber
         self.valueInDollars = valueInDollars
-        dateCreated = NSDate()
+        self.dateCreated  = NSDate()
+        self.itemKey = NSUUID().UUIDString
+        
         super.init() // must call super initializer
     }
     
@@ -44,5 +52,25 @@ class Item: NSObject {
         } else {
             self.init(name: "", serialNumber: nil, valueInDollars: 0)
         }
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        name           = aDecoder.decodeObjectForKey( "name")         as! String
+        dateCreated    = aDecoder.decodeObjectForKey( "dateCreated")  as! NSDate
+        itemKey        = aDecoder.decodeObjectForKey( "itemKey")      as! String
+        serialNumber   = aDecoder.decodeObjectForKey( "serialNumber") as! String?
+        valueInDollars = aDecoder.decodeIntegerForKey("valueInDollars")
+        
+        super.init()
+    }
+    
+    // MARK: - Functions
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject( name,           forKey: "name") // converts to NSString to save as Object
+        aCoder.encodeObject( dateCreated,    forKey: "dateCreated")
+        aCoder.encodeObject( itemKey,        forKey: "itemKey")
+        aCoder.encodeObject( serialNumber,   forKey: "serialNumber")
+        aCoder.encodeInteger(valueInDollars, forKey: "valueInDollars")
     }
 }
